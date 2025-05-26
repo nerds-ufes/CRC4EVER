@@ -141,7 +141,7 @@ The response should have a TTL of 103* (64 + 40).
 
 Each slice can be selected at the host by choosing a different **ToS (Type of Service)** value, or by using different **TCP/UDP ports**.
 
-![Path Selection](image.png) <!-- Substitua pelo nome correto da imagem -->
+![Path Selection](CRC4EVER/fig/CRC4EVER.png) 
 
 Select the slice that corresponds to the desired path, as illustrated in the figure:
 - **Path 1** — Blue
