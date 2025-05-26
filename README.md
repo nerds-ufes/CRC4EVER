@@ -67,18 +67,18 @@ cd bf-sde-9.13.2
 ```
 Compile the custom P4 code (Verification pipeline):
 ```
-../tools/p4_build.sh ~/p7/p4src/p7calc_mod.p4
+../tools/p4_build.sh ~/CRC4EVER/p4src/p7calc_mod.p4
 ```
 Compile P7 and (Forward pipeline) p4 code:
 
 ```
-../tools/p4_build.sh ~/p7/p4src/p7_polka.p4
+../tools/p4_build.sh ~/CRC4EVER/p4src/p7_polka.p4
 ```
 
 Run the switch:
 
 ```
-./run_switchd.sh -p p7_polka p7calc_mod -c ~/p7/p4src/multiprogram_custom_bfrt.conf
+./run_switchd.sh -p p7_polka p7calc_mod -c ~/CRC4EVER/p4src/multiprogram_custom_bfrt.conf
 ```
 
 ### Load the Tables and Set Ports
@@ -92,11 +92,11 @@ cd bf-sde-9.13.2
 ```
 Load table information:
 ```
-bfshell -b ~p7/files/bfrt.py
+bfshell -b ~CRC4EVER/files/bfrt.py
 ```
 Configure ports:
 ```
-bfshell -f ~/p7/files/ports_config.txt -i
+bfshell -f ~/CRC4EVER/files/ports_config.txt -i
 ```
 
 ### Send Traffic
@@ -221,13 +221,14 @@ This script extracts and displays the PoT value for validation and verification.
 
 
 ## Team
-We are members of [**NERDS** — *Nucleus for Studies in Software Defined Networks*](https://nerds-ufes.github.io/polka/index.html) at the **Federal University of Espírito Santo (UFES)** in Vitória, Espírito Santo, Brazil; [**INTRIG** — *Information & Networking Technologies Research & Innovation Group*](http://intrig.dca.fee.unicamp.br) at the **University of Campinas (Unicamp)** in São Paulo, Brazil; and the [**Brazilian National Research and Education Network (RNP)**](https://www.rnp.br/).
+We are members of [**NERDS** — *Nucleus for Studies in Software Defined Networks*](https://nerds-ufes.github.io/polka/index.html) at the **Federal University of Espírito Santo (UFES)** in Vitória, Espírito Santo, Brazil; [**INTRIG** — *Information & Networking Technologies Research & Innovation Group*](http://intrig.dca.fee.unicamp.br) at the **University of Campinas (Unicamp)**.
 
 ## Contributing
 PRs are very much appreciated. For bugs/features consider creating an issue before sending a PR.
 
 ## Documentation
 For further information about P7, please read our wiki (https://github.com/intrig-unicamp/p7/wiki)
+For further information about PoLKA please read our website (https://nerds-ufes.github.io/polka/index.html)
 
 Thanks to all contributors
 
