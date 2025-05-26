@@ -168,7 +168,7 @@ ping -Q 23 10.0.0.20
 
 The **Proof of Transit (PoT)** mechanism relies on a unique mapping between the `routeID` and the sequence of node identifiers (`nodeIDs`) and port identifiers (`portIDs`) along the path to generate a **path signature**.
 
-### 🔢 PoT Calculation Formula
+### PoT Calculation Formula
 
 PoTᵢ = CRC32( nodeIDᵢ || portIDᵢ || PoTᵢ₋₁ )
 
@@ -181,7 +181,7 @@ This mechanism enables intrinsic path verification by performing **end-to-end Po
 
 ---
 
-### 🐞 Debugging Path Verification
+### Debugging Path Verification
 
 1. Open the P4 source file:
 
@@ -195,21 +195,21 @@ With this function enabled, the PoT value is sent back to the **source MAC addre
 
 ---
 
-### 🚦 Testing with Scapy (Packet Sender)
+### Testing with Scapy (Packet Sender)
 
 At **Host 1 (source)**, use the Scapy script `send3.py` to send a packet with the desired ToS (which selects the path):
 
 ```bash
-python3 send3.py 21
+python3 send3.py
 
 Replace 21 with:
 21 for Path 1
 22 for Path 2
 23 for Path 3
 
-🛑 Capturing and Verifying PoT
+Capturing and Verifying PoT
 
-At Host 2 (destination), use the provided tcpdump script hash_collect.sh to capture packets and display the PoT metadata:
+At **Host 2 (destination)**, use the provided tcpdump script hash_collect.sh to capture packets and display the PoT metadata:
 
 ```
 bash hash_collect.sh
