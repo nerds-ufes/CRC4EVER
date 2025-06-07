@@ -204,19 +204,24 @@ control SwitchIngress(
     Hash<bit<32>>(HashAlgorithm_t.CUSTOM, poly1) hash1;
 
     action operation_add(bit<8> value) {
-	hdr.rec.pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw, hdr.rec.sw_id});
+	//bit<48> pot; 
+	//pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw, hdr.rec.sw_id});
+	//pot = (bit<48>) hash1.get(hdr.rec.pot);
 	//hdr.rec.pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw});
         hdr.ipv4.ttl = hdr.ipv4.ttl + value;
+	//hdr.rec.pot = pot;
+	//hdr.ethernet.src_addr = pot;	
     }  
 
     action operation_add2(bit<8> value) {
-	hdr.ethernet.src_addr = hdr.rec.pot;
 	bit<48> pot; 
         //hdr.rec.pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw, hdr.rec.sw_id});
-	pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw});
+	//pot = (bit<48>) hash1.get({hdr.rec.pot, hdr.rec.sw});
+	//pot = (bit<48>) hash1.get({hdr.rec.pot, (bit <16>) 1});
+	pot = (bit<48>) hash1.get(hdr.rec.pot);
 	hdr.rec.pot = pot;
         hdr.ipv4.ttl = hdr.ipv4.ttl + value;
-	//hdr.ethernet.src_addr = pot;	
+	hdr.ethernet.src_addr = pot;	
     }
 
     action operation_xor(bit<8> value) {
@@ -250,6 +255,7 @@ control SwitchIngress(
         }
         actions = {
             operation_add;
+	    operation_add2;
             operation_xor;
             operation_and;
             operation_or;
@@ -264,7 +270,7 @@ control SwitchIngress(
         if(!hdr.arp.isValid()){
             calculate.apply();
         }
-//	if(hdr.rec.sw_id==1){
+//	if(hdr.rec.sw_id > 1 && hdr.rec.sw_id < 6){
 //	    operation_add2(4);
 //	}
 //	else{

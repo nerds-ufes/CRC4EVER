@@ -60,9 +60,9 @@ topo.routing(1, 8)
 # routeid(Slice number, list of switch, list of links, dest_IP)
 # Slice 1
 # ----->
-topo.routeid(1, ["sw2","sw3","sw5"], [2,5,7], "10.0.0.20", 120)
+topo.routeid(1, ["sw2","sw3","sw5"], [2,5,7], "10.0.0.20", 10)
 # <-----
-topo.routeid(1, ["sw5","sw3","sw2"], [5,2,1], "10.0.0.10", 121)
+topo.routeid(1, ["sw5","sw3","sw2"], [5,2,1], "10.0.0.10", 10)
 # addslice(Slice number, Port number/Default)
 # 0 = other packets/Default slice
 # If not default slice is defined, other packets will be droped
@@ -74,13 +74,13 @@ topo.addslice(1, 21)
 topo.slicemetric("ToS")
 
 # Slice 2
-topo.routeid(2, ["sw2","sw4","sw5"], [3,6,7], "10.0.0.20", 131)
-topo.routeid(2, ["sw5","sw4","sw2"], [6,3,1], "10.0.0.10", 132)
+topo.routeid(2, ["sw2","sw4","sw5"], [3,6,7], "10.0.0.20", 3)
+topo.routeid(2, ["sw5","sw4","sw2"], [6,3,1], "10.0.0.10", 4)
 topo.addslice(2, 22)
 
 # Slice 3
-topo.routeid(3, ["sw2","sw3","sw4","sw5"], [2,4,6,7], "10.0.0.20", 141)
-topo.routeid(3, ["sw5","sw4","sw3","sw2"], [6,4,2,1], "10.0.0.10", 142)
+topo.routeid(3, ["sw2","sw3","sw4","sw5"], [2,4,6,7], "10.0.0.20", 5)
+topo.routeid(3, ["sw5","sw4","sw3","sw2"], [6,4,2,1], "10.0.0.10", 6)
 topo.addslice(3, 0)
 
 # Edge

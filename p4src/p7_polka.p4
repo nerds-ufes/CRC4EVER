@@ -336,7 +336,13 @@ control SwitchIngress(
     // Send packet to the next internal switch 
     // Reset the initial timestamp
     // Increase the ID of the switch
-    action send_next(bit<16> sw_id) {
+
+    action send_to_debug(){
+        hdr.ethernet.src_addr = hdr.rec.pot;
+        //ig_intr_tm_md.ucast_egress_port = 160;
+    } 
+
+   action send_next(bit<16> sw_id) {
         // PolKa routing
         md.ndata = (bit<152>) (hdr.rec.routeid >> 8);
         md.diff = (bit<8>) hdr.rec.routeid;
@@ -347,11 +353,8 @@ control SwitchIngress(
         hdr.rec.sw_id = sw_id;
 
         ig_intr_tm_md.ucast_egress_port = port_user;
-    }
-    action send_to_debug(){
-	hdr.ethernet.src_addr = hdr.rec.pot;
-        //ig_intr_tm_md.ucast_egress_port = 160;
-    }
+        //send_to_debug();
+	}
     action send_next_1(bit<16> link_id) {
 	hdr.rec.sw = link_id;
   	//send_to_debug();
@@ -360,7 +363,7 @@ control SwitchIngress(
         // PolKa routing
         md.nres = hash2.get(md.ndata);
         hdr.rec.sw = (bit<16>) (md.nres^md.diff); // Next link by PolKa
-	// send_to_debug();
+	send_to_debug();
     }
     action send_next_3() {
         // PolKa routing
@@ -378,7 +381,7 @@ control SwitchIngress(
         // PolKa routing
         md.nres = hash5.get(md.ndata);
         hdr.rec.sw = (bit<16>) (md.nres^md.diff); // Next link by PolKa
-	send_to_debug();
+	//send_to_debug();
     }
     action send_next_6(bit<16> link_id) {
         hdr.rec.sw = link_id;
@@ -465,6 +468,7 @@ control SwitchIngress(
     action slice_select_dst(bit<160> routeIdPacket, bit<32> pot_k){
         hdr.rec.routeid = routeIdPacket;
 	hdr.rec.pot = (bit<48>) pot_k;
+	//hdr.rec.pot = (bit<48>) 0x00000000;
     }
 
     action slice_select_src(bit<160> routeIdPacket){
